@@ -1,12 +1,10 @@
 #include <iostream>
 
 int main() {
-    int x;
-    x = 5
-
-    int y;
-
-    intfake z;
+    int a;
+    int b
+    int c;
+    intfake d;
 
     return 0;
 }

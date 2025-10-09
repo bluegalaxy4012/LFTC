@@ -16,7 +16,7 @@ o instructiune de ciclare: folosind for (ex: for (int i = 0; i < 10; i++) {...})
 
 Alfabet:
 litere mari si mici ale alfabetului englez (A-Z, a-z)
-caracterele _ + - * / % = < > ! & | ^ $ ( ) { } ; , . ? : [ ] \ " '
+caracterele _ + - * / % = < > ! & | ^ $ ( ) { } ; , . ? : \ " '
 cifrele 0-9
 
 cuvinte rezervate: int, float, if, for, while, cin, cout
@@ -32,7 +32,7 @@ delimitatori: ( ) { } ; ,
 
 
 
-gramatica + reguli lexicale:
+gramatica + reguli lexicale (BNF):
 ---
 
 
@@ -40,7 +40,9 @@ gramatica + reguli lexicale:
 
 <includere> ::= '#include <iostream>'
 
-<functie_principala> ::= 'int' 'main' '(' ')' '{' <lista_declaratii> <lista_instructiuni> 'return' <const_int> ';' '}'
+<functie_principala> ::= 'int' 'main' '(' ')' '{' <lista_declaratii> <lista_instructiuni> <sfarsit_program> '}'
+
+<sfarsit_program> ::= 'return' '0' ';'
 
 <lista_declaratii> ::= <epsilon>
                       | <declaratie>
@@ -66,20 +68,21 @@ gramatica + reguli lexicale:
 <atribuire> ::= <lhs> '=' <expresie>
 <lhs> ::= <identificator> | <identificator> '.' <identificator>
 
-<citire> ::= 'cin' '>>' <lista_identificatori>
+<citire> ::= 'std::cin' '>>' <cin_items>
+<cin_items> ::= <identificator>
+               | <identificator> '>>' <cin_items>
 
-<scriere> ::= 'cout' '<<' <lista_cout>
-<lista_cout> ::= <cout_item>
-               | <cout_item> '<<' <lista_cout>
-<cout_item> ::= <expresie> | <const_string>
+<scriere> ::= 'std::cout' '<<' <cout_items>
+<cout_items> ::= cout_item
+                | cout_item '<<' <cout_items>
 
 <daca> ::= 'if' '(' <expresie> ')' <bloc> <altfel_op>
 <altfel_op> ::= 'else' <bloc> | <epsilon>
 
 <pentru> ::= 'for' '(' <for_init> ';' <expresie_opt> ';' <for_inc> ')' <bloc>
-<for_init> ::= <atribuire> | <tip> <lista_identificatori> | <epsilon>
-<expresie_opt> ::= <expresie> | <epsilon>
-<for_inc> ::= <atribuire> | <epsilon>
+<for_init> ::= <atribuire> | <tip> <lista_identificatori>
+<expresie_opt> ::= <expresie>
+<for_inc> ::= <atribuire>
 
 <bloc> ::= '{' <lista_instructiuni> '}'
 
@@ -129,12 +132,27 @@ gramatica + reguli lexicale:
 
 <const_string> ::= '"' <sir_caractere> '"'
 <sir_caractere> ::= <epsilon> | <caracter_fara_quote> | <caracter_fara_quote> <sir_caractere>
-<caracter_fara_quote> ::= orice caracter valid, cu exceptia " si \n
+<caracter_fara_quote> ::= orice caracter valid, cu exceptia "
 
 <cifre> ::= <cifra> | <cifra> <cifre>
 
 <epsilon> ::=    /* secventa vida */
 
+
+
+In Class (Costin-Andrei Ghenea):
+
+<cattimp> ::= 'while' '(' <expresie> ')' <bloc>
+
+/* citiri/scrieri in stream */
+
+<citire> ::= 'cin' '>>' <cin_items>
+<cin_items> ::= <identificator>
+               | <identificator> '>>' <cin_items>
+
+<scriere> ::= 'cout' '<<' <cout_items>
+<cout_items> ::= cout_item
+                | cout_item '<<' <cout_items>
 
 ---
 

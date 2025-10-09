@@ -2,11 +2,13 @@
 
 int main() {
     float r;
+    float perimetru, arie;
+
     std::cout << "Raza: ";
     std::cin >> r;
 
-    float perimetru = 2 * 3.1415 * r;
-    float arie = 3.1415 * r * r;
+    perimetru = 2 * 3.1415 * r;
+    arie = 3.1415 * r * r;
 
     std::cout << "Perimetru: ";
     std::cout << perimetru;

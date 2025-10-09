@@ -2,7 +2,10 @@
 
 int main() {
     float x = 1e2;
+    
+    int EighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharacters = 2;
+    
     x = 0;
 
-    int EighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharacters = 2;
+    return 0;
 }

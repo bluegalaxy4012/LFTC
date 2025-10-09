@@ -2,11 +2,11 @@
 
 int main() {
     int n;
-    std::cout<<"Introdu n si apoi n numere intregi: ";
-    std::cin>>n;
-
     int s = 0;
     int citit;
+
+    std::cout<<"Introdu n si apoi n numere intregi: ";
+    std::cin>>n;
 
     for (int i = 0; i < n; i++) {
         std::cin>>citit;
