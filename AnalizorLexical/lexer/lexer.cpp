@@ -7,7 +7,7 @@
 
 using namespace std;
 
-static map<string, AtomCode> reservedTokens;
+map<string, AtomCode> reservedTokens;
 
 Lexer::Lexer() {
     reservedTokens["int"] = INT; reservedTokens["float"] = FLOAT; reservedTokens["std::string"] = STRING;
@@ -23,8 +23,8 @@ Lexer::Lexer() {
     reservedTokens[">"] = GREATER; reservedTokens[">="] = GREATER_EQ; reservedTokens["!="] = NOT_EQ;
     reservedTokens["&&"] = LOGIC_AND; reservedTokens["||"] = LOGIC_OR;
     reservedTokens[">>"] = READ; reservedTokens["<<"] = WRITE;
-    reservedTokens["("] = LPAREN; reservedTokens[")"] = RPAREN; reservedTokens["{"] = LBRACE;
-    reservedTokens["}"] = RBRACE; reservedTokens[";"] = SEMICOLON; reservedTokens[","] = COMMA;
+    reservedTokens["("] = LEFT_PAREN; reservedTokens[")"] = RIGHT_PAREN; reservedTokens["{"] = LEFT_BRACE;
+    reservedTokens["}"] = RIGHT_BRACE; reservedTokens[";"] = SEMICOLON; reservedTokens[","] = COMMA;
 }
 
 void Lexer::reportError(int line, const string& message) {

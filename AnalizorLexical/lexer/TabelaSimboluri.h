@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 class TabelaSimboluri {
 private:
     string* data;
@@ -10,6 +11,9 @@ private:
     int capacity;
 
     void resize();
+
+
+
 
 public:
     TabelaSimboluri();

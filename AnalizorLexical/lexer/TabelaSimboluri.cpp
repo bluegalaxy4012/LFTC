@@ -10,6 +10,8 @@ TabelaSimboluri::~TabelaSimboluri() {
     delete[] data;
 }
 
+
+
 void TabelaSimboluri::resize() {
     capacity *= 2;
 
@@ -22,10 +24,13 @@ void TabelaSimboluri::resize() {
     data = newData;
 }
 
+
+
 int TabelaSimboluri::add(const string& symbol) {
     // sa fie pastrata ordinea lexicografica
     int low = 0;
     int high = count - 1;
+
     while (low <= high) {
         int mid = low + (high - low) / 2;
         if (data[mid] == symbol) {
@@ -53,6 +58,8 @@ int TabelaSimboluri::add(const string& symbol) {
 
     return insertPos;
 }
+
+
 
 void TabelaSimboluri::saveToFile(ofstream& file) const {
     file << "ATOM\t\tINDEX\n";

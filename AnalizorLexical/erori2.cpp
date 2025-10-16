@@ -1,7 +1,7 @@
 #include <iostream>
 
 int main() {
-    float x = 10.22e1;
+    float x = 10.e1;
     
     int EighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharactersEighteenCharacters = 2;
     
