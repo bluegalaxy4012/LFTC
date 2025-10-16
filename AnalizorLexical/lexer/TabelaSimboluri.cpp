@@ -12,10 +12,12 @@ TabelaSimboluri::~TabelaSimboluri() {
 
 void TabelaSimboluri::resize() {
     capacity *= 2;
+
     string* newData = new string[capacity];
-    for (int i = 0; i < count; ++i) {
+    for (int i = 0; i < count; i++) {
         newData[i] = data[i];
     }
+
     delete[] data;
     data = newData;
 }
@@ -42,7 +44,7 @@ int TabelaSimboluri::add(const string& symbol) {
         resize();
     }
 
-    for (int i = count; i > insertPos; --i) {
+    for (int i = count; i > insertPos; i--) {
         data[i] = data[i - 1];
     }
 

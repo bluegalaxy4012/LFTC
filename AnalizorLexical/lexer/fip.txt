@@ -1,4 +1,4 @@
-cod atom		index ts
+COD ATOM		INDEX TS
 34 		-1
 2 		-1
 0 		0

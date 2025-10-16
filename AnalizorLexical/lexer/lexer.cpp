@@ -7,11 +7,11 @@
 
 using namespace std;
 
-static map<string, TokenCode> reservedTokens;
+static map<string, AtomCode> reservedTokens;
 
 Lexer::Lexer() {
     reservedTokens["int"] = INT; reservedTokens["float"] = FLOAT; reservedTokens["std::string"] = STRING;
-    reservedTokens["if"] = IF; reservedTokens["else"] = ELSE; reservedTokens["for"] = FOR;
+    reservedTokens["if"] = IF; reservedTokens["else"] = ELSE;
     reservedTokens["while"] = WHILE; reservedTokens["return"] = RETURN;
     
     reservedTokens["std::cin"] = STD_CIN;
@@ -28,7 +28,7 @@ Lexer::Lexer() {
 }
 
 void Lexer::reportError(int line, const string& message) {
-    cerr << "Eroare lexicala la linia " << line << ": " << message << endl;
+    cout << "Eroare lexicala la linia " << line << ": " << message << "\n";
 }
 
 void Lexer::saveResults(const string& fipFilename, const string& tsIdFilename, const string& tsConstFilename) {
@@ -52,7 +52,7 @@ void Lexer::saveResults(const string& fipFilename, const string& tsIdFilename, c
 bool Lexer::analyze(const string& inputFilename) {
     ifstream file(inputFilename);
     if (!file.is_open()) {
-        cerr << "Eroare: Nu s-a putut deschide fisierul " << inputFilename << endl;
+        cout << "Eroare: Nu s-a putut deschide fisierul " << inputFilename << "\n";
         return false;
     }
 
@@ -61,9 +61,6 @@ bool Lexer::analyze(const string& inputFilename) {
 
     string firstLine;
     getline(file, firstLine);
-    if (!firstLine.empty() && firstLine.back() == '\r') {
-        firstLine.pop_back();
-    }
     if (firstLine != "#include <iostream>") {
         reportError(1, "Programul trebuie sa inceapa cu '#include <iostream>'");
         return false;
@@ -85,14 +82,14 @@ bool Lexer::analyze(const string& inputFilename) {
             }
 
             if (token.length() > 250) {
-                reportError(line, "Identificator prea lung (depaseste 250 de caractere)");
+                reportError(line, "Identificator prea lung (> 250 caractere)");
                 hasErrors = true;
                 continue;
             }
             
             if (reservedTokens.count(token)) {
                 FIP.push_back({reservedTokens[token], -1});
-            } else if (token.find(":") != string::npos || token.find("_") != string::npos) {
+            } else if (token.find(":") != string::npos) {
                 reportError(line, "Identificator invalid conform MLP incepand cu: '" + token + "'");
                 hasErrors = true;
             } else {
@@ -134,6 +131,7 @@ bool Lexer::analyze(const string& inputFilename) {
         else if (ch == '"') {
             string token;
             bool stringClosed = false;
+
             while (file.get(ch)) {
                 if (ch == '"') {
                     stringClosed = true;

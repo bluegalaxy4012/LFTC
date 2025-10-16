@@ -1,4 +1,4 @@
-atom		index
+ATOM		INDEX
 "Perimetru: "		0
 "Raza: "		1
 "\nArie: "		2

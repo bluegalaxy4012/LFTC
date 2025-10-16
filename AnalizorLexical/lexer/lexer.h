@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum TokenCode {
+enum AtomCode {
     ID = 0, CONST = 1,
     INT = 2, FLOAT = 3, STRING = 4, IF = 5, ELSE = 6, FOR = 7, WHILE = 8,
     RETURN = 9,

@@ -93,8 +93,7 @@ gramatica + reguli lexicale (BNF):
 <term> ::= <factor>
          | <factor> <mulop> <term>
 
-<factor> ::= <lhs>
-           | <const_int>
+<factor> ::= <const_int>
            | <const_float>
            | <const_string>
            | '(' <expresie> ')'
