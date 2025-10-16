@@ -1,7 +1,7 @@
 1.
 
 - 2 tipuri de date simple si un tip de date definit de utilizator:
-int, float, struct Weight { float kg; }
+int, float, std::string
 
 - instructiuni:
 o instructiune de atribuire: cu operatorul = (ex: int a = 5;)
@@ -14,19 +14,18 @@ o instructiune de ciclare: folosind for (ex: for (int i = 0; i < 10; i++) {...})
 
 - specificare:
 
-Alfabet:
+Alfabet (pentru identificatori, constante, operatori, delimitatori):
 litere mari si mici ale alfabetului englez (A-Z, a-z)
-caracterele _ + - * / % = < > ! & | ^ $ ( ) { } ; , . ? : \ " '
+caracterele + - * / % = < > ! & | ^ $ ( ) { } ; , . ? : \ " '
 cifrele 0-9
 
-cuvinte rezervate: int, float, if, for, while, cin, cout
+cuvinte rezervate: int, float, string, if, for, while, cin, cout, return, else, string, main, include, iostream
 
 operatori:
 aritmetici: + - * / %
 de atribuire: =
 de comparare: < > <= >= == !=
 logici: && ||
-de accesare: .
 
 delimitatori: ( ) { } ; ,
 
@@ -49,7 +48,7 @@ gramatica + reguli lexicale (BNF):
                       | <declaratie> <lista_declaratii>
 
 <declaratie> ::= <tip> <lista_identificatori> ';'
-<tip> ::= 'int' | 'float' | 'Weight'
+<tip> ::= 'int' | 'float' | 'std::string'
 
 <lista_identificatori> ::= <identificator>
                          | <identificator> ',' <lista_identificatori>
@@ -62,11 +61,10 @@ gramatica + reguli lexicale (BNF):
                  | <citire> ';'
                  | <scriere> ';'
                  | <daca>
-                 | <pentru>
+                 | <cattimp>
                  | <bloc>
 
-<atribuire> ::= <lhs> '=' <expresie>
-<lhs> ::= <identificator> | <identificator> '.' <identificator>
+<atribuire> ::= <identificator> '=' <expresie>
 
 <citire> ::= 'std::cin' '>>' <cin_items>
 <cin_items> ::= <identificator>
@@ -79,10 +77,7 @@ gramatica + reguli lexicale (BNF):
 <daca> ::= 'if' '(' <expresie> ')' <bloc> <altfel_op>
 <altfel_op> ::= 'else' <bloc> | <epsilon>
 
-<pentru> ::= 'for' '(' <for_init> ';' <expresie_opt> ';' <for_inc> ')' <bloc>
-<for_init> ::= <atribuire> | <tip> <lista_identificatori>
-<expresie_opt> ::= <expresie>
-<for_inc> ::= <atribuire>
+<cattimp> ::= 'while' '(' <expresie> ')' <bloc>
 
 <bloc> ::= '{' <lista_instructiuni> '}'
 
@@ -101,6 +96,7 @@ gramatica + reguli lexicale (BNF):
 <factor> ::= <lhs>
            | <const_int>
            | <const_float>
+           | <const_string>
            | '(' <expresie> ')'
 
 <addop> ::= '+' | '-'
@@ -120,7 +116,6 @@ gramatica + reguli lexicale (BNF):
 
 <litera> ::= 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
            | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
-           | '_'
 
 <cifra> ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 
@@ -142,15 +137,15 @@ gramatica + reguli lexicale (BNF):
 
 In Class (Costin-Andrei Ghenea):
 
-<cattimp> ::= 'while' '(' <expresie> ')' <bloc>
+/* pus cattimp la instructiuni */
 
 /* citiri/scrieri in stream */
 
-<citire> ::= 'cin' '>>' <cin_items>
+<citire> ::= 'std::cin' '>>' <cin_items>
 <cin_items> ::= <identificator>
                | <identificator> '>>' <cin_items>
 
-<scriere> ::= 'cout' '<<' <cout_items>
+<scriere> ::= 'std::cout' '<<' <cout_items>
 <cout_items> ::= cout_item
                 | cout_item '<<' <cout_items>
 

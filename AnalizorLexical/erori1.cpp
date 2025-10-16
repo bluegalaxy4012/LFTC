@@ -1,10 +1,8 @@
 #include <iostream>
 
 int main() {
-    int a;
-    int b
-    int c;
-    intfake d;
+    float a = 10x;
 
+    a = a $ 2;
     return 0;
 }

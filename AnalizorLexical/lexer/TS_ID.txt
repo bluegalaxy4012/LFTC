@@ -1,0 +1,5 @@
+atom		index
+arie		0
+main		1
+perimetru		2
+r		3
