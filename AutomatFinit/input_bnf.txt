@@ -1,0 +1,18 @@
+<fisier_af> ::= <stari> "\n" <alfabet> "\n" <stare_init> "\n" <stari_finale> "\n" <lista_tranzitii>
+
+<stari> ::= <stare> | <stare> " " <stari>
+<alfabet> ::= <simbol> | <simbol> " " <alfabet>
+<stare_init> ::= <stare>
+<stari_finale> ::= <stare> | <stare> " " <stari_finale>
+
+<lista_tranzitii> ::= <tranzitie> | <tranzitie> "\n" <lista_tranzitii>
+<tranzitie> ::= <stare> " " <simbol> " " <stare>
+
+<stare>   ::= <litera> <rest_stare>
+<rest_stare> ::= <caracter_stare> <rest_stare> | <epsilon>
+<caracter_stare> ::= <litera> | <cifra>
+
+<simbol>  ::= <litera> | <cifra> | "+" | "-"
+
+<litera>  ::= "a" | ... | "z" | "A" | ... | "Z"
+<cifra>   ::= "0" | ... | "9"

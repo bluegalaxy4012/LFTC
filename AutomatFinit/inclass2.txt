@@ -1,0 +1,8 @@
+FiniteStateMachine
+    states: Set<String>
+    alphabet: Set<String>
+    transitions: List<Tuple> (Tuple = (stare_initiala, simbol, stare_rezultanta))
+    initial_state: String
+    final_states: Set<String>
+    letters = Set("a", "b", "c"..., "z")
+    digits = Set("0", "1"..., "9")

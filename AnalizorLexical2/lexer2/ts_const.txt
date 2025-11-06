@@ -1,0 +1,7 @@
+ATOM		INDEX
+"Perimetru: "		0
+"Raza: "		1
+"\nArie: "		2
+0		3
+2		4
+3.1415		5
