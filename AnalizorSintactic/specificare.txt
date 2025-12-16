@@ -1,0 +1,189 @@
+1.
+
+- 2 tipuri de date simple si un tip de date definit de utilizator:
+int, float, string
+
+- instructiuni:
+o instructiune de atribuire: cu operatorul = (ex: int a = 5;)
+o instructiune de intrare/iesire: folosind cin/cout (ex: cin >> a; cout << a;)
+o instructiune de selectie (conditionala): folosind if (ex: if (a > 0) {...})
+o instructiune de ciclare: folosind for (ex: while (a > 0) {...})
+
+- restrictia sa fie identificatori de lungime oarecare nedepasind 250 de caractere
+
+- specificare:
+
+Alfabet (pentru identificatori, constante, operatori, delimitatori):
+litere mari si mici ale alfabetului englez (A-Z, a-z)
+caracterele + - * / % = < > ! & | ( ) { } ; , ? : \ " '
+cifrele 0-9
+
+cuvinte rezervate: int, float, string, if, while, do, doend, cin, cout, return, else, string, main, #include, <iostream>, using, namespace, std
+
+operatori:
+aritmetici: + - * / %
+de atribuire: =
+de comparare: < > <= >= == !=
+logici: && ||
+
+delimitatori: ( ) { } ; ,
+
+
+
+gramatica + reguli lexicale (BNF):
+---
+
+
+<program> ::= <start_program> <functie_principala>
+
+<start_program> ::= <includere> <namespace>
+
+<includere> ::= '#include' <iostream>'
+<namespace> ::= 'using namespace std;'
+
+<functie_principala> ::= 'int' 'main' '(' ')' '{' <lista_declaratii> <lista_instructiuni> <sfarsit_program> '}'
+
+<sfarsit_program> ::= 'return' '0' ';'
+
+<lista_declaratii> ::= <epsilon>
+                      | <declaratie>
+                      | <declaratie> <lista_declaratii>
+
+<declaratie> ::= <tip> <lista_identificatori> ';'
+<tip> ::= 'int' | 'float' | 'std::string'
+
+<lista_identificatori> ::= <identificator>
+                         | <identificator> ',' <lista_identificatori>
+
+<lista_instructiuni> ::= <epsilon>
+                        | <instructiune>
+                        | <instructiune> <lista_instructiuni>
+
+<instructiune> ::= <atribuire> ';'
+                 | <citire> ';'
+                 | <scriere> ';'
+                 | <daca>
+                 | <cattimp>
+                 | <repeta>
+                 | <bloc>
+
+<atribuire> ::= <identificator> '=' <expresie>
+
+<citire> ::= 'cin' '>>' <cin_items>
+<cin_items> ::= <identificator>
+               | <identificator> '>>' <cin_items>
+
+<scriere> ::= 'cout' '<<' <cout_items>
+<cout_items> ::= cout_item
+                | cout_item '<<' <cout_items>
+
+<daca> ::= 'if' '(' <expresie> ')' <bloc> <altfel_op>
+<altfel_op> ::= 'else' <bloc> | <epsilon>
+
+<cattimp> ::= 'while' '(' <expresie> ')' <bloc>
+
+<repeta> ::= 'do' <bloc> 'while' '(' <expresie> ')' 'doend' ';'
+
+<bloc> ::= '{' <lista_instructiuni> '}'
+
+/* expresii */
+<expresie> ::= <exp_relational>
+
+<exp_relational> ::= <exp_add>
+                   | <exp_add> <relop> <exp_add>
+
+<exp_add> ::= <term>
+            | <term> <addop> <exp_add>
+
+<term> ::= <factor>
+         | <factor> <mulop> <term>
+
+<factor> ::= <const_int>
+           | <const_float>
+           | <const_string>
+           | '(' <expresie> ')'
+
+<addop> ::= '+' | '-'
+<mulop> ::= '*' | '/' | '%'
+<relop> ::= '<' | '<=' | '>' | '>=' | '==' | '!='
+
+/* reguli lexicale */
+
+/* max 250 caractere pentru identificatori */
+<identificator> ::= <litera> 
+                  | <litera> <ident_continua>
+
+<ident_continua> ::= <caracter_id>
+                   | <caracter_id> <ident_continua>
+
+<caracter_id> ::= <litera> | <cifra>
+
+
+<litera> ::= 'a' | 'b' | ... | 'z' | 'A' | 'B' | ... | 'Z'
+<cifra> ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+/* constante */
+<semn_opt> ::= '+' | '-' | <epsilon>
+
+<const_int> ::= <semn_opt> <intreg>
+<intreg> ::= <intreg_baza2> | <intreg_baza8> | <intreg_baza10> | <intreg_baza16>
+
+<intreg_baza2> ::= '0' 'b' <cifre_baza2>
+<cifre_baza2> ::= '0' | '1' | '0' <cifre_baza2> | '1' <cifre_baza2>
+
+<intreg_baza8> ::= '0' <cifre_baza8>
+<cifra_baza8> ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7'
+<cifre_baza8> ::= <cifra_baza8> | <cifra_baza8> <cifre_baza8>
+
+<intreg_baza10> ::= '0' | <cifra_nenula> | <cifra_nenula> <cifre>
+
+<intreg_baza16> ::= '0' 'x' <cifre_baza16>
+<cifra_baza16> ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'a' | 'b' | 'c' | 'd' | 'e' | 'f'
+<cifre_baza16> ::= <cifra_baza16> | <cifra_baza16> <cifre_baza16>
+
+
+<const_float> ::= <semn_opt> '0' '.' <cifre>
+                 | <semn_opt> <cifra_nenula> '.' <cifre>
+                 | <semn_opt> <cifra_nenula> <cifre> '.' <cifre>
+
+<const_string> ::= '"' <sir_caractere> '"'
+<sir_caractere> ::= <epsilon> | <caracter_fara_quote> | <caracter_fara_quote> <sir_caractere>
+<caracter_fara_quote> ::= orice caracter valid, cu exceptia "
+
+<cifre> ::= <cifra> | <cifra> <cifre>
+
+<epsilon> ::=    /* secventa vida */
+
+
+
+In Class (Costin-Andrei Ghenea):
+
+/* pus cattimp la instructiuni */
+
+/* citiri/scrieri in stream */
+
+<citire> ::= 'cin' '>>' <cin_items>
+<cin_items> ::= <identificator>
+               | <identificator> '>>' <cin_items>
+
+<scriere> ::= 'cout' '<<' <cout_items>
+<cout_items> ::= cout_item
+                | cout_item '<<' <cout_items>
+
+---
+
+
+
+2.
+
+- calculeaza perimetrul si aria cercului de o raza data: cerc.cpp
+- determina cmmdc a 2 nr naturale: cmmdc.cpp
+- calculeaza suma a n numere citite de la tastatura: suma.cpp
+
+3.
+
+- Unul dintre programe contine doua erori care sunt in acelasi timp erori in limbajul original (pentru care MLP defineste un subset): erori1.cpp
+
+- Al doilea program contine doua erori conform MLP, dar care nu sunt erori in limbajul original. Se cere ca acesta sa fie compilat si executat in limbajul original ales: erori2.cpp
+
+

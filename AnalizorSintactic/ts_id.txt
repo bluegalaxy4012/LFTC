@@ -1,0 +1,3 @@
+ATOM		INDEX
+n		0
+s		1

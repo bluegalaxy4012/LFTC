@@ -1,0 +1,58 @@
+program -> start_program functie_principala
+start_program -> DIR_INCLUDE DIR_USING
+functie_principala -> KEY_INT ID DELIM_LPAREN DELIM_RPAREN DELIM_LBRACE lista_declaratii lista_instructiuni sfarsit_program DELIM_RBRACE
+sfarsit_program -> KEY_RETURN CONST_INT DELIM_SEMICOLON
+lista_declaratii -> EPS
+lista_declaratii -> declaratie lista_declaratii
+declaratie -> tip lista_identificatori DELIM_SEMICOLON
+tip -> KEY_INT
+tip -> KEY_FLOAT
+tip -> KEY_STRING
+lista_identificatori -> ID
+lista_identificatori -> ID DELIM_COMMA lista_identificatori
+lista_instructiuni -> EPS
+lista_instructiuni -> instructiune lista_instructiuni
+instructiune -> atribuire DELIM_SEMICOLON
+instructiune -> citire DELIM_SEMICOLON
+instructiune -> scriere DELIM_SEMICOLON
+instructiune -> structura_if
+instructiune -> structura_while
+instructiune -> structura_do_doend
+instructiune -> bloc
+atribuire -> ID OP_ASSIGN expresie
+citire -> KEY_CIN OP_READ cin_items
+cin_items -> ID
+cin_items -> ID OP_READ cin_items
+scriere -> KEY_COUT OP_WRITE cout_items
+cout_items -> cout_item
+cout_items -> cout_item OP_WRITE cout_items
+cout_item -> ID
+cout_item -> CONST_INT
+cout_item -> CONST_FLOAT
+cout_item -> CONST_STRING
+structura_if -> KEY_IF DELIM_LPAREN expresie DELIM_RPAREN bloc altfel_op
+altfel_op -> KEY_ELSE bloc
+altfel_op -> EPS
+structura_while -> KEY_WHILE DELIM_LPAREN expresie DELIM_RPAREN bloc
+structura_do_doend -> KEY_DO bloc KEY_WHILE DELIM_LPAREN expresie DELIM_RPAREN KEY_DOEND DELIM_SEMICOLON
+bloc -> DELIM_LBRACE lista_instructiuni DELIM_RBRACE
+expresie -> exp_relational
+exp_relational -> exp_add
+exp_relational -> exp_add OP_LT exp_add
+exp_relational -> exp_add OP_LTE exp_add
+exp_relational -> exp_add OP_GT exp_add
+exp_relational -> exp_add OP_GTE exp_add
+exp_relational -> exp_add OP_EQ exp_add
+exp_relational -> exp_add OP_NEQ exp_add
+exp_add -> term
+exp_add -> term OP_PLUS exp_add
+exp_add -> term OP_MINUS exp_add
+term -> factor
+term -> factor OP_MULT term
+term -> factor OP_DIV term
+term -> factor OP_MOD term
+factor -> CONST_INT
+factor -> CONST_FLOAT
+factor -> CONST_STRING
+factor -> ID
+factor -> DELIM_LPAREN expresie DELIM_RPAREN
